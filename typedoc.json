@@ -1,6 +1,9 @@
 {
     "entryPoints": [
-        "./src/index.ts"
+        "./src/index.ts",
+        "./src/note.ts",
+        "./src/fileIO.ts",
+        "./src/utils.ts"
     ],
     "out": "./docs"
 }
