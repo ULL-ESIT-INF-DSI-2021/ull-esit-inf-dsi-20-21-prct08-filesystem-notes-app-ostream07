@@ -4,6 +4,9 @@ import {Note} from './note';
 import { loadNotes, removeNote, saveNote} from './fileIO';
 import { getNoteByTitle, getColorByString, getColorizer } from "./utils";
 
+/**
+ * @api Yarg for the command add
+ */
 yargs.command({
   command: 'add',
   describe: 'Add a new note',
@@ -50,6 +53,9 @@ yargs.command({
   },
 });
 
+/**
+ * @api Yarg for the command modify
+ */
 yargs.command({
   command: 'modify',
   describe: 'Modify an existing note',
@@ -97,6 +103,9 @@ yargs.command({
   },
 });
 
+/**
+ * @api Yarg for the command remove
+ */
 yargs.command({
   command: 'remove',
   describe: 'Remove an existing note',
@@ -123,6 +132,9 @@ yargs.command({
   },
 });
 
+/**
+ * @api Yarg for the command list
+ */
 yargs.command({
   command: 'list',
   describe: 'List all notes for an user',
@@ -147,6 +159,9 @@ yargs.command({
   },
 });
 
+/**
+ * @api Yarg for the command read
+ */
 yargs.command({
   command: 'read',
   describe: 'Read an existing note of an user',

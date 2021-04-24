@@ -62,7 +62,7 @@ export function getColorByString(color: string) {
 }
 
 /**
- * @function getColorizer, uses the module chalk to paint with differents color
+ * @function getColorizer, uses the API chalk to paint with differents color
  * @param note a note of a user
  * @returns the note paint with the select color, or in white by default
  */
