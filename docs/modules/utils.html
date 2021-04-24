@@ -93,16 +93,29 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-ostream07/blob/3711b0e/src/utils.ts#L23">utils.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-ostream07/blob/071c06d/src/utils.ts#L42">utils.ts:42</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>function</dt>
+									<dd><p>getColorByString, received a color int a string and returns the
+										crrespondent color defined into de enum Color</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>color: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>color of the note</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><a href="../enums/note.color.html#blue" class="tsd-signature-type" data-tsd-kind="Enumeration member">BLUE</a><span class="tsd-signature-symbol"> | </span><a href="../enums/note.color.html#red" class="tsd-signature-type" data-tsd-kind="Enumeration member">RED</a><span class="tsd-signature-symbol"> | </span><a href="../enums/note.color.html#yellow" class="tsd-signature-type" data-tsd-kind="Enumeration member">YELLOW</a><span class="tsd-signature-symbol"> | </span><a href="../enums/note.color.html#black" class="tsd-signature-type" data-tsd-kind="Enumeration member">BLACK</a><span class="tsd-signature-symbol"> | </span><a href="../enums/note.color.html#green" class="tsd-signature-type" data-tsd-kind="Enumeration member">GREEN</a></h4>
+							<p>the color defined into the enum Color, or false if the color is
+							undefined</p>
 						</li>
 					</ul>
 				</section>
@@ -116,16 +129,27 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-ostream07/blob/3711b0e/src/utils.ts#L45">utils.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-ostream07/blob/071c06d/src/utils.ts#L69">utils.ts:69</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>function</dt>
+									<dd><p>getColorizer, uses the module chalk to paint with differents color</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>note: <a href="../classes/note.note-1.html" class="tsd-signature-type" data-tsd-kind="Class">Note</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>a note of a user</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Chalk</span></h4>
+							<p>the note paint with the select color, or in white by default</p>
 						</li>
 					</ul>
 				</section>
@@ -139,19 +163,33 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-ostream07/blob/3711b0e/src/utils.ts#L5">utils.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-ostream07/blob/071c06d/src/utils.ts#L11">utils.ts:11</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>function</dt>
+									<dd><p>getNoteByTitle, checks if a note exists looking for the title</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>title: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>title of the note</p>
+									</div>
 								</li>
 								<li>
 									<h5>notes: <a href="../classes/note.note-1.html" class="tsd-signature-type" data-tsd-kind="Class">Note</a><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>vector of notes</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><a href="../classes/note.note-1.html" class="tsd-signature-type" data-tsd-kind="Class">Note</a></h4>
+							<p>the note if the title exist, or false if the title doesnot appear</p>
 						</li>
 					</ul>
 				</section>
@@ -159,25 +197,39 @@
 					<a name="searchentryindex" class="tsd-anchor"></a>
 					<h3>search<wbr>Entry<wbr>Index</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">search<wbr>Entry<wbr>Index<span class="tsd-signature-symbol">(</span>title<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NoteIndex</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">IndexEntry</span></li>
+						<li class="tsd-signature tsd-kind-icon">search<wbr>Entry<wbr>Index<span class="tsd-signature-symbol">(</span>title<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, index<span class="tsd-signature-symbol">: </span><a href="../interfaces/interfaces.noteindex.html" class="tsd-signature-type" data-tsd-kind="Interface">NoteIndex</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/interfaces.indexentry.html" class="tsd-signature-type" data-tsd-kind="Interface">IndexEntry</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-ostream07/blob/3711b0e/src/utils.ts#L14">utils.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-ostream07/blob/071c06d/src/utils.ts#L26">utils.ts:26</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>function</dt>
+									<dd><p>searchEntryIndex, looks for an entry of the user index</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>title: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>title of the note</p>
+									</div>
 								</li>
 								<li>
-									<h5>index: <span class="tsd-signature-type">NoteIndex</span></h5>
+									<h5>index: <a href="../interfaces/interfaces.noteindex.html" class="tsd-signature-type" data-tsd-kind="Interface">NoteIndex</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>index of the user</p>
+									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">IndexEntry</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/interfaces.indexentry.html" class="tsd-signature-type" data-tsd-kind="Interface">IndexEntry</a></h4>
+							<p>the correspondent entry to the title given, or false in other case</p>
 						</li>
 					</ul>
 				</section>
@@ -194,6 +246,9 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="index.html">index</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="interfaces.html">interfaces</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="note.html">note</a>
@@ -231,6 +286,9 @@
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>

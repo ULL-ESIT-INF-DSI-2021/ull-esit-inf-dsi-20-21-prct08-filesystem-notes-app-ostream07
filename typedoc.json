@@ -3,7 +3,8 @@
         "./src/index.ts",
         "./src/note.ts",
         "./src/fileIO.ts",
-        "./src/utils.ts"
+        "./src/utils.ts",
+        "./src/interfaces.ts"
     ],
     "out": "./docs"
 }
