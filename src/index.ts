@@ -42,13 +42,16 @@ yargs.command({
         if (color) {
           let note = new Note(argv.title, color, argv.body);
           saveNote(argv.user, note);
+          console.log(chalk.green('New note added!'));
         } else {
-          console.log('Invalid color');
-          console.log('Admited colors: Red, Blue, Green, Yellow, Black');
+          console.log(chalk.red('Invalid color'));
+          console.log(chalk.red('Admited colors: Red, Blue, Green, Yellow, Black'));
         }
       } else {
-        console.log('Error! Already exist a note with this title');
+        console.log(chalk.red('Error! Already exist a note with this title'));
       }
+    } else {
+      console.log(chalk.red('It is necesary to give all the arguments'));
     }
   },
 });
@@ -91,14 +94,16 @@ yargs.command({
         if (color) {
           let note = new Note(argv.title, color, argv.body);
           saveNote(argv.user, note);
+          console.log(chalk.green('Note modified correctly!'));
         } else {
-          console.log('Invalid color');
-          console.log('Admited colors: Red, Blue, Green, Yellow, Black');
+          console.log(chalk.red('Invalid color'));
+          console.log(chalk.red('Admited colors: Red, Blue, Green, Yellow, Black'));
         }
       } else {
         console.log(chalk.red('Error! The note does not exist'));
       }
-
+    } else {
+      console.log(chalk.red('It is necesary to give all the arguments'));
     }
   },
 });
@@ -124,9 +129,9 @@ yargs.command({
   handler(argv) {
     if (typeof argv.title === 'string' && typeof argv.user === 'string') {
       if (removeNote(argv.user, argv.title)) {
-        console.log('Correctly removed');
+        console.log(chalk.green('Correctly removed'));
       } else {
-        console.error('The note does not exist!');
+        console.error(chalk.red('The note does not exist!'));
       }
     } 
   },
@@ -154,7 +159,7 @@ yargs.command({
         console.log(colorizer(note.getTitle()));
       }
     } else {
-      console.log(chalk.red('Error'));
+      console.log(chalk.red('Error, invalid argument'));
     }
   },
 });
@@ -183,11 +188,14 @@ yargs.command({
       let note = getNoteByTitle(argv.title, userNotes);
       if (note) {
         let colorizer = getColorizer(note);
+        console.log(chalk.green('Your notes:'));
         console.log(colorizer(note.getTitle()));
         console.log(colorizer(note.getText()));
       } else {
-        console.log(chalk.red('Error'));
+        console.log(chalk.red(`The user ${argv.user} does not have any notes`));
       }
+    } else {
+      console.log(chalk.red('Invalid arguments!'));
     }
   },
 });
