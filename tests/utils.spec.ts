@@ -1,6 +1,6 @@
 import "mocha";
 import { expect } from "chai";
-import { getNoteByTitle, searchEntryIndex } from "../src/utils";
+import { getNoteByTitle, searchEntryIndex, getColorByString } from "../src/utils";
 import { Color, Note } from "../src/note";
 import { IndexEntry, NoteIndex } from "../src/interfaces";
 
@@ -33,5 +33,9 @@ describe("utils function tests", () => {
         {"title":"Green note","fileName":"Green_note.json"},{"title":"Black note","fileName":"Black_note.json"}]};
         const entry: IndexEntry = {"title":"Orange note","fileName":"Blue_note.json"}; 
         expect(searchEntryIndex(entry.title, indexTest)).to.be.false;
+      });
+
+      it("color", () => {
+        expect(getColorByString('rEd')).to.be.equal(Color.RED);
       });
 });
