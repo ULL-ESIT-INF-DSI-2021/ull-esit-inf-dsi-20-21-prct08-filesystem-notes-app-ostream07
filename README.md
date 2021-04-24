@@ -1,9 +1,9 @@
 # Desarrollo de Sistemas Informáticos
 ### Práctica 8. Aplicación de procesamiento de notas de texto
 
-Autor: Saúl Pérez García
-Correo: alu0101129785@ull.edu.es
-Fecha de entrega: 25-04-2021
+* Autor: Saúl Pérez García
+* Correo: alu0101129785@ull.edu.es
+* Fecha de entrega: 25-04-2021
 
 ### --> Introducción
 
@@ -53,10 +53,12 @@ A partir de ahora, vamos a pasar a explicar la solución propuesta para esta pr�
 
 `note.ts` contiene la clase `Note` con los siguietes atributos:
 
-```
-  * @param title Title of a note
-  * @param color Color of a note
-  * @param text Text or body of a note 
+```typescript
+/**
+   * @param title Title of a note
+   * @param color Color of a note
+   * @param text Text or body of a note 
+   */
 ```
 
 También va a presentar los siguientes métodos:
