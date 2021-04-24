@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { saveNote, loadNotes, removeNote } from "../src/fileIO";
 import { Color, Note } from "../src/note";
 
-describe("fileIO function tests", () => {
+describe("fileIO functions tests", () => {
   it("it saves a note and loads it back", () => {
     const note1 = new Note("note1", Color.YELLOW, "yellow test");
     const testUser = "testing";

@@ -3,7 +3,6 @@ export enum Color { BLUE = 'blue', RED = 'red', YELLOW = 'yellow', BLACK = 'blac
 
 export class Note {
   constructor(private title: string, private color: Color, private text: string) {
-
   }
 
   getTitle(): string {
@@ -17,5 +16,4 @@ export class Note {
   getText(): string {
     return this.text;
   }
-
 } 

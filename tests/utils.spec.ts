@@ -4,7 +4,7 @@ import { getNoteByTitle, searchEntryIndex, getColorByString } from "../src/utils
 import { Color, Note } from "../src/note";
 import { IndexEntry, NoteIndex } from "../src/interfaces";
 
-describe("utils function tests", () => {
+describe("utils functions tests", () => {
   it("it search the title of a vector with some notes", () => {
     const note1 = new Note("note1", Color.YELLOW, "yellow test");
     const note2 = new Note("note2", Color.GREEN, "green test");
