@@ -1,7 +1,8 @@
 import * as yargs from 'yargs';
+import chalk from "chalk";
 import {Note} from './note';
-import { loadNotes, saveNotes} from './fileIO';
-import { getNoteByTitle, getColorByString } from "./utils";
+import { loadNotes, removeNote, saveNote} from './fileIO';
+import { getNoteByTitle, getColorByString, getColorizer } from "./utils";
 
 yargs.command({
   command: 'add',
@@ -36,8 +37,8 @@ yargs.command({
       if (!getNoteByTitle(argv.title, userNotes)) {
         let color = getColorByString(argv.color);
         if (color) {
-          userNotes.push(new Note(argv.title, color, argv.body));
-          saveNotes(userNotes, argv.user);
+          let note = new Note(argv.title, color, argv.body);
+          saveNote(argv.user, note);
         } else {
           console.log('Invalid color');
           console.log('Admited colors: Red, Blue, Green, Yellow, Black');
@@ -75,9 +76,23 @@ yargs.command({
     },
   },
   handler(argv) {
-    if (typeof argv.title === 'string') {
-      // Required logic to add a new note
-      console.log(argv.title + ' ' + argv.user + ' ' + argv.body + ' ' + argv.color);
+    if (typeof argv.title === 'string' && typeof argv.user === 'string' && 
+              typeof argv.body === 'string' && typeof argv.color === 'string') {
+      
+      let userNotes = loadNotes(argv.user);
+      if (getNoteByTitle(argv.title, userNotes)) {
+        let color = getColorByString(argv.color);
+        if (color) {
+          let note = new Note(argv.title, color, argv.body);
+          saveNote(argv.user, note);
+        } else {
+          console.log('Invalid color');
+          console.log('Admited colors: Red, Blue, Green, Yellow, Black');
+        }
+      } else {
+        console.log(chalk.red('Error! The note does not exist'));
+      }
+
     }
   },
 });
@@ -98,10 +113,13 @@ yargs.command({
     },
   },
   handler(argv) {
-    if (typeof argv.title === 'string') {
-      // Required logic to add a new note
-      console.log(argv.title + ' ' + argv.user);
-    }
+    if (typeof argv.title === 'string' && typeof argv.user === 'string') {
+      if (removeNote(argv.user, argv.title)) {
+        console.log('Correctly removed');
+      } else {
+        console.error('The note does not exist!');
+      }
+    } 
   },
 });
 
@@ -118,12 +136,13 @@ yargs.command({
   handler(argv) {
     if (typeof argv.user === 'string') {
       let userNotes = loadNotes(argv.user);
-      console.log('Listing notes for user ' + argv.user + '...\n');
+      console.log(chalk.green(`Listing notes for user ${argv.user} ...`));
       for (const note of userNotes) {
-        console.log(note.getTitle() + ' ' + note.getColor());
+        let colorizer = getColorizer(note);
+        console.log(colorizer(note.getTitle()));
       }
     } else {
-      console.log('Error');
+      console.log(chalk.red('Error'));
     }
   },
 });
@@ -148,10 +167,11 @@ yargs.command({
       let userNotes = loadNotes(argv.user);
       let note = getNoteByTitle(argv.title, userNotes);
       if (note) {
-        console.log(note.getTitle());
-        console.log(note.getText());
+        let colorizer = getColorizer(note);
+        console.log(colorizer(note.getTitle()));
+        console.log(colorizer(note.getText()));
       } else {
-        console.log('Error');
+        console.log(chalk.red('Error'));
       }
     }
   },
