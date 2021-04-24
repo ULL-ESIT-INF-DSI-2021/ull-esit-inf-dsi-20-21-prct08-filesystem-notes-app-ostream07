@@ -12,7 +12,7 @@ describe("utils function tests", () => {
     const vectorTest = [note1, note2, note3];
     expect(getNoteByTitle("note1", vectorTest)).to.be.deep.equal(note1);
   });
-  it("it search the title of a vector with some notes", () => {
+  it("returns false because the title which is looking for does not exist", () => {
     const note1 = new Note("note1", Color.YELLOW, "yellow test");
     const note2 = new Note("note2", Color.GREEN, "green test");
     const note3 = new Note("note3", Color.RED, "red test");
@@ -39,10 +39,19 @@ describe("utils function tests", () => {
     expect(searchEntryIndex(entry.title, indexTest)).to.be.false;
   });
 
-  it("color", () => {
+  it("Checks if the color of the note is red", () => {
     expect(getColorByString('rEd')).to.be.equal(Color.RED);
   });
-  it("color", () => {
+  it("Checks if the color of the note is blue", () => {
     expect(getColorByString('bLuE')).to.be.equal(Color.BLUE);
+  });
+  it("Checks if the color of the note is yellow", () => {
+    expect(getColorByString('yellow')).to.be.equal(Color.YELLOW);
+  });
+  it("Checks if the color of the note is green", () => {
+    expect(getColorByString('GREEN')).to.be.equal(Color.GREEN);
+  });
+  it("Checks if the color of the note is black", () => {
+    expect(getColorByString('blACK')).to.be.equal(Color.BLACK);
   });
 });
