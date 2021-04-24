@@ -55,21 +55,25 @@ A partir de ahora, vamos a pasar a explicar la solución propuesta para esta pr�
 
 ```typescript
 /**
-   * @param title Title of a note
-   * @param color Color of a note
-   * @param text Text or body of a note 
+   * @param title, title of a note
+   * @param color, color of a note
+   * @param text, text or body of a note 
    */
 ```
 
 También va a presentar los siguientes métodos:
 
-```
+```typescript
   getTitle() // returns the title of a note
   getColor() // returns the color of a note
   getText() // returns the text or body of a note
 ```
 
 Además, cuenta con un enumerado denominado `Color` que contiene los distintos colores disponibles para las notas. Como podemos ver, esta clase tiene como misión dotar a una nota de sus características fundamentales.
+
+### -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Pasamos ahora a hablar sobre el contenido de `interfaces.ts`
 
 
 
