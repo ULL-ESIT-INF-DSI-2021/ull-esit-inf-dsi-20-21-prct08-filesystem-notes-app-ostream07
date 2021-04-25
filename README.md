@@ -51,7 +51,7 @@ Por medio de la API síncrona de Node.js, debemos hacer persistente la lista de 
 
 A partir de ahora, vamos a pasar a explicar la solución propuesta para esta práctica. Esta gira entorno a las notas, por tanto, vamos a comenzar viendo el fichero `note.ts`.
 
-###### --> Fichero note.ts 
+#### --> Fichero note.ts 
 
 Contiene la clase `Note` con los siguietes atributos:
 
@@ -74,7 +74,7 @@ También va a presentar los siguientes métodos:
 Además, cuenta con un enumerado denominado `Color` que contiene los distintos colores disponibles para las notas. Como podemos ver, esta clase tiene como misión dotar a una nota de sus características fundamentales.
 
 
-### -------------------------------------------------------------------------------------------------------------------------------------------
+### ------------------------------------------------------------------------------------------------------------------------------
 
 Pasamos ahora a hablar sobre el contenido de `interfaces.ts`.
 
@@ -83,9 +83,9 @@ Pasamos ahora a hablar sobre el contenido de `interfaces.ts`.
 Tiene dos interfaces, la primera de ellas, `IndexEntry`, que nos va a permitir almacenar información sobre el título y el usuario de una determinada nota, para asignarlo como entrada a un **índice**, donde estarán alojados todos los títulos de las notas de cada usuario. La segunda es `NoteIndex` que tiene un `index` que va a ser de tipo `IndexEntry` para poder ver todas las notas de cada usuario.
 
 
-### -------------------------------------------------------------------------------------------------------------------------------------------
+### ------------------------------------------------------------------------------------------------------------------------------
 
-###### --> Fichero utils.ts
+#### --> Fichero utils.ts
 
 El siguiente del que hablaremos será `utils.ts`, este contiene funciones de gran apoyo empleadas a lo largo largo del código y que nos van a permitir cumplir con nuestro objetivo.
 
@@ -106,9 +106,9 @@ Los métodos más interesantes son `getNoteByTitle` y `searchEntryIndex`.
 * **searchEntryIndex**. Es muy parecido al anterior, pero se encarga de buscar una entrada dentro de todas las que se encuentran en el índice. Si la encuentra, devolverá aquella entrada cuyo título haya dado coincidencia, en caso contrario, devolverá false.
 
 
-### -------------------------------------------------------------------------------------------------------------------------------------------
+### ------------------------------------------------------------------------------------------------------------------------------
 
-###### --> Fichero fileIO.ts
+#### --> Fichero fileIO.ts
 
 A continuación es el turno del fichero `fileIO.ts`, aquí se encuentran las funciones correspondientes para poder cargar las notas, guardar las notas y eliminarlas. El manejo del sistema de ficheros también se encuentra en este fichero gracias a la funcionalidad adquirida al hacer `import * as fs from 'fs'`.
 
@@ -136,9 +136,9 @@ El último paso sería escribir la nota.
 * `removeNote`. Esta función también requiere del dirPath, si comprueba que existe, carga el índice correspondiente y acto seguido vamos a recorrer cada una de las entradas que tenga, hasta dar con una con el mismo título que la que estamos buscando. Si la encuentra, la borraremos con un `fs.unlinkSync` seguido de un `splice(i, 1)` que nos va a borrar una entrada desde la posición actual.
 
 
-### -------------------------------------------------------------------------------------------------------------------------------------------
+### ------------------------------------------------------------------------------------------------------------------------------
 
-###### --> Fichero index.ts
+#### --> Fichero index.ts
 
 Finalmente llegamos al `index.ts`, aquí es donde usamos `yargs` para parsear diferentes argumentos pasados a un programa desde la línea de comandos. En concreto permite gestionar diferentes comandos, cada uno de ellos, con sus opciones y manejador correspondientes. 
 A modo de ejemplo, vamos a ver su funcionamiento con uno de los comandos que se van a implementar, `add`:
@@ -203,7 +203,7 @@ Si se realiza lo anterior correctamente, vamos a pasar a buscar si ese usuario t
 New note added!
 
 [~/DSI/prueba(master)]$npx ts-node src/index.ts add --user="edusegre" --title="Special yellow note" --body="This is now a special yellow note" --color="yellow"
-<span style="color:red">some Error! Already exist a note with this title. text</span>
+Error! Already exist a note with this title
 ```
 
 
