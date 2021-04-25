@@ -206,6 +206,20 @@ New note added!
 Error! Already exist a note with this title
 ```
 
+#### --> Ejemplos de métodos de empleo de los comandos add, remove, modify, list y read.
+
+```
+  * npx ts-node src/index.ts add --user="edusegre" --title="Black note" --body="This is now a black note" --color="black"
+
+  * npx ts-node src/index.ts read --user="edusegre" --title="Yellow note"
+
+  * npx ts-node src/index.ts list --user="edusegre"
+
+  * npx ts-node src/index.ts modify --user="edusegre" --title="Yellow  note" --body="This is now a yellow note" --color="yellow"
+
+  * npx ts-node src/index.ts remove --user="edusegre" --title="Red note"
+```
+
 Finalmente, vamos a ver la salida de las pruebas diseñadas para probar el correcto funcionamiento del código:
 
 ```
@@ -283,21 +297,4 @@ describe("fileIO functions tests", () => {
   });
 });
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-// npx ts-node src/index.ts add --user="edusegre" --title="Black note" --body="This is now a black note" --color="black"
-// npx ts-node src/index.ts read --user="edusegre" --title="Yellow note"
-// npx ts-node src/index.ts list --user="edusegre"
-// npx ts-node src/index.ts modify --user="edusegre" --title="Yellow  note" --body="This is now a yellow note" --color="yellow"
-// npx ts-node src/index.ts remove --user="edusegre" --title="Red note"
 
