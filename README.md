@@ -206,6 +206,83 @@ New note added!
 Error! Already exist a note with this title
 ```
 
+Finalmente, vamos a ver la salida de las pruebas diseñadas para probar el correcto funcionamiento del código:
+
+```
+> prueba@1.0.0 coverage
+> nyc npm test
+
+
+> prueba@1.0.0 test
+> mocha
+
+
+
+  fileIO functions tests
+    ✓ it saves a note and loads it back
+    ✓ it deletes a note and check that it is removed
+
+  note functions tests
+    ✓ Checks the title of a note
+    ✓ Checks the color of a note
+    ✓ Checks the text of a note
+
+  utils functions tests
+    ✓ it search the title of a vector with some notes
+    ✓ returns false because the title which is looking for does not exist
+    ✓ it search an entry for a user index
+    ✓ it search a false entry for a user index
+    ✓ Checks if the color of the note is red
+    ✓ Checks if the color of the note is blue
+    ✓ Checks if the color of the note is yellow
+    ✓ Checks if the color of the note is green
+    ✓ Checks if the color of the note is black
+    ✓ returns false because the color gray is not available
+
+
+  15 passing (82ms)
+```
+
+Vamos a ver algunas de ellas con más detenimiento:
+
+* Comprobamos el título de una nota:
+```
+describe("note functions tests", () => {
+  it("Checks the title of a note", () => {
+    const note1 = new Note("note1", Color.YELLOW, "yellow test");
+    expect(note1.getTitle()).to.be.equal('note1');
+  });
+)};
+```
+
+* Comprobamos que reacciona correctamente si el título buscado no coincide con ninguna de las notas que tiene almacenadas en el índice:
+```
+describe("utils functions tests", () => {
+  it("it search a false entry for a user index", () => {
+    const indexTest: NoteIndex = {
+      "index": [{ "title": "Yellow note", "fileName": "Yellow_note.json" },
+      { "title": "Red note", "fileName": "Red_note.json" }, { "title": "Blue note", "fileName": "Blue_note.json" },
+      { "title": "Green note", "fileName": "Green_note.json" }, { "title": "Black note", "fileName": "Black_note.json" }]
+    };
+    const entry: IndexEntry = { "title": "Orange note", "fileName": "Blue_note.json" };
+    expect(searchEntryIndex(entry.title, indexTest)).to.be.false;
+  });
+)};
+```
+
+* Eliminamos una nota y comprobamos que se borra satisfactoriamente:
+
+```
+describe("fileIO functions tests", () => {
+  it("it deletes a note and check that it is removed", () => {
+    const note1 = new Note("note1", Color.YELLOW, "yellow test");
+    const testUser = "testing";
+    saveNote(testUser, note1);
+    removeNote(testUser, note1.getTitle());
+    expect(loadNotes(testUser)).not.contains(note1);
+  });
+});
+```
 
 
 
