@@ -47,11 +47,13 @@ Por medio de la API síncrona de Node.js, debemos hacer persistente la lista de 
 
 * Cargar una nota desde los diferentes ficheros con formato JSON almacenados en el directorio del usuario correspondiente.
 
-### Implementación
+### --> Implementación
 
 A partir de ahora, vamos a pasar a explicar la solución propuesta para esta práctica. Esta gira entorno a las notas, por tanto, vamos a comenzar viendo el fichero `note.ts`.
 
-`note.ts` contiene la clase `Note` con los siguietes atributos:
+###### --> Fichero note.ts 
+
+Contiene la clase `Note` con los siguietes atributos:
 
 ```typescript
 /**
@@ -71,18 +73,138 @@ También va a presentar los siguientes métodos:
 
 Además, cuenta con un enumerado denominado `Color` que contiene los distintos colores disponibles para las notas. Como podemos ver, esta clase tiene como misión dotar a una nota de sus características fundamentales.
 
-### -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Pasamos ahora a hablar sobre el contenido de `interfaces.ts`
+### -------------------------------------------------------------------------------------------------------------------------------------------
 
+Pasamos ahora a hablar sobre el contenido de `interfaces.ts`.
 
+###### --> Fichero `interfaces.ts`
 
-
-
-
-
+Tiene dos interfaces, la primera de ellas, `IndexEntry`, que nos va a permitir almacenar información sobre el título y el usuario de una determinada nota, para asignarlo como entrada a un **índice**, donde estarán alojados todos los títulos de las notas de cada usuario. La segunda es `NoteIndex` que tiene un `index` que va a ser de tipo `IndexEntry` para poder ver todas las notas de cada usuario.
 
 
+### -------------------------------------------------------------------------------------------------------------------------------------------
+
+###### --> Fichero utils.ts
+
+El siguiente del que hablaremos será `utils.ts`, este contiene funciones de gran apoyo empleadas a lo largo largo del código y que nos van a permitir cumplir con nuestro objetivo.
+
+Las funciones de las que disponemos son:
+
+```typescript
+getNoteByTitle(title: string, notes: Note[]) // checks if a note exists looking for the title
+searchEntryIndex(title: string, index: NoteIndex) // looks for an entry of the user index
+getColorByString(color: string) // received a color int a string and returns the
+                                // correspondent color defined into de enum Color
+getColorizer(note: Note) // uses the API chalk to paint with differents color
+```
+
+Los métodos más interesantes son `getNoteByTitle` y `searchEntryIndex`.
+
+* **getNoteByTitle**. Este método realiza una búsqueda donde toma el atributo `title` de una nota e itera dentro del vector donde se encuentras todas las notas hasta encontrar una coincidencia, si la hay, devuelve la nota encontrada, sino es que no hay ninguuna nota con ese título y devuelve false.
+
+* **searchEntryIndex**. Es muy parecido al anterior, pero se encarga de buscar una entrada dentro de todas las que se encuentran en el índice. Si la encuentra, devolverá aquella entrada cuyo título haya dado coincidencia, en caso contrario, devolverá false.
+
+
+### -------------------------------------------------------------------------------------------------------------------------------------------
+
+###### --> Fichero fileIO.ts
+
+A continuación es el turno del fichero `fileIO.ts`, aquí se encuentran las funciones correspondientes para poder cargar las notas, guardar las notas y eliminarlas. El manejo del sistema de ficheros también se encuentra en este fichero gracias a la funcionalidad adquirida al hacer `import * as fs from 'fs'`.
+
+```typescript
+loadIndex(dirPath: string) // load the index with the informations with all the notes of an user
+loadNotes(user: string) // load all the notes of an user
+saveNote(user: string, note: Note) // saves the title, body and color of the note in the 
+                                   // correspondent directory of the user, if it does not 
+                                   // exist, the method will create it.
+removeNote(user: string, title: string) // delete searching by the title, the entry of a 
+                                        // note located into the index of an user
+```
+
+La función `loadIndex` es una función de uso local en este fichero, y nos va a servir de apoyo en las otras puesto que nos permite actualizar el índice, ya sea cargando, guardando notas nuevas o eliminando alguna ya existente, funcionalidades correspondientes a los otros métodos.
+
+
+* `loadNotes`. Permite cargar las notas. Su cometido en primera instancia, será obtener un `dirPath` que será el directorio de un usario, donde se van a almacenar todas sus notas, así como un índice denominado `index.json` con el título de cada una así como los ficheros .json creados por cada una de ellas. Una vez tenemos el dirPath, cargamos el índice correspondiente, donde iremos almacenando los ficheros **.json**. Para ello, usaremos un ``join` con el dirPath y el `fileName`, para más adelante parsearlo y conseguir el objeto JSON. El último paso será hacer un `push` con la información que se va a almacenar referida a la nota en ese fichero que se va a crear, y retornamos el vector de notas.
+
+
+* `saveNote`. Como en el caso anterior, necesitaremos un dirPath y además, requeriremos de una variable llamada `index` que será como un vector de entradas del índice. Si  ese usuario no tenía notas, crea la carpeta e inicializamos el index, en caso contrario, tenemos que añadir esa nueva entrada a index.
+Luego, crearemos un `indexEntry`, donde almacenaremos una variable tipo  `IndexEntry` si se realiza correctamente, o false en caso de que la operación no sea correcta. Si el título ya estaba, solo tenemos que igualarlo, sino tendremos que crear el fichero .json con el título y sustituyendo espacio en blanco (en caso de haberlos) por `_` y concatenar luego .json, luego hacemos un push y le damos la ruta correspondiente para que se cree dentro del directorio personal del usuario en cuestión. 
+El último paso sería escribir la nota.
+
+
+* `removeNote`. Esta función también requiere del dirPath, si comprueba que existe, carga el índice correspondiente y acto seguido vamos a recorrer cada una de las entradas que tenga, hasta dar con una con el mismo título que la que estamos buscando. Si la encuentra, la borraremos con un `fs.unlinkSync` seguido de un `splice(i, 1)` que nos va a borrar una entrada desde la posición actual.
+
+
+### -------------------------------------------------------------------------------------------------------------------------------------------
+
+###### --> Fichero index.ts
+
+Finalmente llegamos al `index.ts`, aquí es donde usamos `yargs` para parsear diferentes argumentos pasados a un programa desde la línea de comandos. En concreto permite gestionar diferentes comandos, cada uno de ellos, con sus opciones y manejador correspondientes. 
+A modo de ejemplo, vamos a ver su funcionamiento con uno de los comandos que se van a implementar, `add`:
+
+```typescript
+yargs.command({
+  command: 'add',
+  describe: 'Add a new note',
+  builder: {
+    title: {
+      describe: 'Note title',
+      demandOption: true,
+      type: 'string',
+    },
+    user: {
+      describe: 'Notes owner',
+      demandOption: true,
+      type: 'string',
+    },
+    body: {
+      describe: 'Note body',
+      demandOption: true,
+      type: 'string',
+    },
+    color: {
+      describe: 'Note color',
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler(argv) {
+    if (typeof argv.title === 'string' && typeof argv.user === 'string' && 
+          typeof argv.body === 'string' && typeof argv.color === 'string') {
+
+      let userNotes = loadNotes(argv.user);
+      if (!getNoteByTitle(argv.title, userNotes)) {
+        let color = getColorByString(argv.color);
+        if (color) {
+          let note = new Note(argv.title, color, argv.body);
+          saveNote(argv.user, note);
+          console.log(chalk.green('New note added!'));
+        } else {
+          console.log(chalk.red('Invalid color'));
+          console.log(chalk.red('Admited colors: Red, Blue, Green, Yellow, Black'));
+        }
+      } else {
+        console.log(chalk.red('Error! Already exist a note with this title'));
+      }
+    } else {
+      console.log(chalk.red('It is necesary to give all the arguments'));
+    }
+  },
+});
+```
+
+Este nos permite añadir una nota nueva, para ello necesitaremos que nos pasen 4 argumentos, el nombre del usuario, título de la nota, texto o body de la misma y finalmente su color, de lo contrario, saltará un error que nos va a indicar que nos faltan argumentos.
+
+Si se realiza lo anterior correctamente, vamos a pasar a buscar si ese usuario tiene alguna nota con ese título, si ya existe, nos aparecerá un mensaje en rojo por el empleo de `chalk` informando de que ya existe una nota con ese título. En caso contrario, tomaremos el color, si el color no es de los disponibles, nos saldrá un mensaje que nos avise de ello, en caso contrario, se creará una nota nueva y a continuación, se llamará a `saveNote` para guardarla. Finalmente, nos aparecerá un mensaje en verde diciendo que la nota se ha añadido. Aquí un ejemplo:
+
+```
+[~/DSI/prueba(master)]$npx ts-node src/index.ts add --user="edusegre" --title="Special yellow note" --body="This is now a special yellow note" --color="yellow"
+New note added!
+
+[~/DSI/prueba(master)]$npx ts-node src/index.ts add --user="edusegre" --title="Special yellow note" --body="This is now a special yellow note" --color="yellow"
+<span style="color:red">some Error! Already exist a note with this title. text</span>
+```
 
 
 
